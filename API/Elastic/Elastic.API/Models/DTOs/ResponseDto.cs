@@ -5,7 +5,7 @@ namespace Elastic.API.Models.DTOs
     public record ResponseDto<T>
     {
         public T? Data { get; set; }
-        public List<String>? Errors { get; set; }
+        public List<string>? Errors { get; set; }
         public HttpStatusCode Status { get; set; }
 
         
@@ -20,7 +20,7 @@ namespace Elastic.API.Models.DTOs
             };
         }
 
-        public static ResponseDto<T> Fail(List<String> errors, HttpStatusCode status)
+        public static ResponseDto<T> Fail(List<string> errors, HttpStatusCode status)
         {
             return new ResponseDto<T>
             {

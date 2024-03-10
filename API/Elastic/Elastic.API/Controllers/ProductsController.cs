@@ -6,7 +6,7 @@ namespace Elastic.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductsController : ControllerBase
+    public class ProductsController : BaseController
     {
         public readonly ProductService _productService;
 
@@ -18,7 +18,13 @@ namespace Elastic.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Save(ProductCreateDto request)
         {
-            return Ok(await _productService.SaveAsync(request));
+            return CreateActionResult(await _productService.SaveAsync(request));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            return CreateActionResult(await _productService.GetAllAsync());
         }
     }
 }
