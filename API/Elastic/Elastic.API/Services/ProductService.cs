@@ -1,4 +1,5 @@
-﻿using Elastic.API.Models.DTOs;
+﻿using Elastic.API.Models;
+using Elastic.API.Models.DTOs;
 using Elastic.API.Repository;
 
 namespace Elastic.API.Services
@@ -47,6 +48,18 @@ namespace Elastic.API.Services
             // var productListDto = products.Select(p => new ProductDto(p.Id, p.Name, p.Price, p.Stock, new ProductFeatureDto(p.Feature.Width, p.Feature.Height, p.Feature.Color))).ToList();
 
             return ResponseDto<List<ProductDto>>.Success(productListDto, System.Net.HttpStatusCode.OK);
+        }
+
+        public async Task<ResponseDto<ProductDto>> GetByIdAsync(string id)
+        {
+            var product = await _repository.GetByIdAsync(id);
+
+            if(product == null)
+            {
+                return ResponseDto<ProductDto>.Fail("Product does not exist", System.Net.HttpStatusCode.NotFound);
+            }
+
+            return ResponseDto<ProductDto>.Success(product.CreateDto(), System.Net.HttpStatusCode.NotFound);
         }
     }
 }
