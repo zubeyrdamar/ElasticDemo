@@ -2,6 +2,8 @@
 using Elastic.API.Extensions;
 using Elastic.API.Repository;
 using Elastic.API.Services;
+using Elasticsearch.Net;
+using Nest;
 
 namespace Elastic.API
 {
